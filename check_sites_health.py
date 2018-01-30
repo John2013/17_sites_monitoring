@@ -27,7 +27,7 @@ def get_domain_expiration_date(url, days_count):
     if expiration_date is None:
         return False
     time = timedelta(days=days_count)
-    return (datetime.now() + time) < expiration_date
+    return datetime.now() + time < expiration_date
 
 
 def print_bool(boolean):
