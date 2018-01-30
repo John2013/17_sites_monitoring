@@ -31,7 +31,7 @@ def get_domain_expiration_date(url, days_count):
 
 
 def print_bool(boolean):
-    return ('✘', '✔')[boolean]
+    return '✔' if boolean else '✘'
 
 
 if __name__ == '__main__':
