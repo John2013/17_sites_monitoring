@@ -19,19 +19,19 @@ def is_server_respond_with_200(url):
         return False
 
 
-def get_domain_expiration_date(url):
+def get_domain_expiration_date(url, days_count):
     domain = urlparse(url).netloc
     expiration_date = whois.whois(domain).expiration_date
+    if type(expiration_date) is list:
+        expiration_date = expiration_date[0]
     if expiration_date is None:
         return False
-    one_month = timedelta(hours=24 * 30)
-    return datetime.now() + one_month < expiration_date
+    time = timedelta(days=days_count)
+    return (datetime.now() + time) < expiration_date
 
 
 def print_bool(boolean):
-    if boolean:
-        return '✔'
-    return '✘'
+    return ('✘', '✔')[boolean]
 
 
 if __name__ == '__main__':
@@ -40,11 +40,17 @@ if __name__ == '__main__':
     else:
         exit("Файл со ссылками на проверяемые сайты не найден")
 
+    if len(sys.argv) > 2 and int(sys.argv[2]) > 0:
+        days_count = int(sys.argv[2])
+    else:
+        days_count = 30
+
     for url in load_urls4check(urls_path):
         print('url: {}'.format(url))
         print('http status 200: {}'.format(
             print_bool(is_server_respond_with_200(url))
         ))
-        print('Следующий месяц оплачен: {}\n'.format(
-            print_bool(get_domain_expiration_date(url))
+        print('домен на {} дней оплачен: {}\n'.format(
+            days_count,
+            print_bool(get_domain_expiration_date(url, days_count))
         ))

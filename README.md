@@ -29,7 +29,25 @@ http://wbest.org
 2. Запустите скрипт:
 
 ```bash
-python3 check_sites_health.py <path_to_urls_file>  # или python3
+python check_sites_health.py <path_to_urls_file> <days_count(default:30)>
+# или python3
+```
+
+Пример:
+
+```bash
+python check_sites_health.py urls.txt 60
+url: https://ya.ru
+http status 200: ✔
+домен на 60 дней оплачен: ✔
+
+url: https://google.ru
+http status 200: ✔
+домен на 60 дней оплачен: ✘
+
+url: http://wbest.org
+http status 200: ✔
+домен на 60 дней оплачен: ✔
 ```
 
 # Цели проекта
