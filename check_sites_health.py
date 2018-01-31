@@ -6,13 +6,13 @@ from datetime import datetime, timedelta
 import whois
 
 
-def load_urls4check(path):
+def read_urls_file(path):
     with open(path) as file:
         for url in file.read().split('\n'):
             yield url
 
 
-def is_server_respond_with_200(url):
+def is_server_respond_is_ok(url):
     try:
         return requests.get(url).ok
     except requests.exceptions.ConnectionError:
@@ -26,8 +26,7 @@ def get_domain_expiration_date(url, days_count):
         expiration_date = expiration_date[0]
     if expiration_date is None:
         return False
-    time = timedelta(days=days_count)
-    return datetime.now() + time < expiration_date
+    return datetime.now() + timedelta(days=days_count) < expiration_date
 
 
 def print_bool(boolean):
@@ -45,10 +44,10 @@ if __name__ == '__main__':
     else:
         days_count = 30
 
-    for url in load_urls4check(urls_path):
+    for url in read_urls_file(urls_path):
         print('url: {}'.format(url))
         print('http status 200: {}'.format(
-            print_bool(is_server_respond_with_200(url))
+            print_bool(is_server_respond_is_ok(url))
         ))
         print('домен на {} дней оплачен: {}\n'.format(
             days_count,
