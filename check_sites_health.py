@@ -2,7 +2,6 @@ import argparse
 
 import requests
 from os.path import isfile
-from urllib.parse import urlparse
 from datetime import datetime, timedelta
 import whois
 
