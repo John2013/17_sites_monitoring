@@ -21,8 +21,7 @@ def is_server_respond_is_ok(url):
 
 
 def get_domain_expiration_date(url, days_count):
-    domain = urlparse(url).netloc
-    expiration_date = whois.whois(domain).expiration_date
+    expiration_date = whois.whois(url).expiration_date
     if type(expiration_date) is list:
         expiration_date = expiration_date[0]
     if expiration_date is None:
