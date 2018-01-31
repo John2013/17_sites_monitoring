@@ -29,14 +29,25 @@ http://wbest.org
 2. Запустите скрипт:
 
 ```bash
-python check_sites_health.py <path_to_urls_file> <days_count(default:30)>
-# или python3
+usage: check_sites_health.py [-h] --urls URLS_FILE [--days DAYS_COUNT]
+
+Отображает информацию о работоспособности сайтов
+
+Обязательный аргумент:
+  --urls URLS_FILE, -u URLS_FILE
+                        Путь к файлу со списком ссылок
+
+Необязательные аргументы:
+  -h, --help            show this help message and exit
+  --days DAYS_COUNT, -d DAYS_COUNT
+                        Количество дней для проверки срока домена (по
+                        умолчанию - 30)
 ```
 
 Пример:
 
 ```bash
-python check_sites_health.py urls.txt 60
+python check_sites_health.py -u urls.txt -d 60
 url: https://ya.ru
 http status 200: ✔
 домен на 60 дней оплачен: ✔
