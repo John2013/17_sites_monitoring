@@ -32,7 +32,7 @@ def print_bool(boolean):
     return '✔' if boolean else '✘'
 
 
-if __name__ == '__main__':
+def get_args():
     parser = argparse.ArgumentParser(
         description='Отображает информацию о работоспособности сайтов'
     )
@@ -58,6 +58,12 @@ if __name__ == '__main__':
 
     if not isfile(args.urls_file):
         parser.error('Файл со ссылками не найден')
+
+    return args
+
+
+if __name__ == '__main__':
+    args = get_args()
 
     for url in read_urls_file(args.urls_file):
         print('url: {}'.format(url))
