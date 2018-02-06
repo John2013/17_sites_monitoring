@@ -19,7 +19,7 @@ def is_server_respond_is_ok(url):
         return False
 
 
-def get_domain_expiration_date(url, days_count):
+def is_domain_renewed(url, days_count):
     expiration_date = whois.whois(url).expiration_date
     if type(expiration_date) is list:
         expiration_date = expiration_date[0]
@@ -32,7 +32,7 @@ def print_bool(boolean):
     return '✔' if boolean else '✘'
 
 
-def get_args():
+def parse_args():
     parser = argparse.ArgumentParser(
         description='Отображает информацию о работоспособности сайтов'
     )
@@ -63,7 +63,7 @@ def get_args():
 
 
 if __name__ == '__main__':
-    args = get_args()
+    args = parse_args()
 
     for url in read_urls_file(args.urls_file):
         print('url: {}'.format(url))
@@ -72,5 +72,5 @@ if __name__ == '__main__':
         ))
         print('домен на {} дней оплачен: {}\n'.format(
             args.days_count,
-            print_bool(get_domain_expiration_date(url, args.days_count))
+            print_bool(is_domain_renewed(url, args.days_count))
         ))
