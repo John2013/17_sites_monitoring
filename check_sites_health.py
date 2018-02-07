@@ -56,14 +56,14 @@ def parse_args():
     )
     args = parser.parse_args()
 
-    if not isfile(args.urls_file):
-        parser.error('Файл со ссылками не найден')
-
-    return args
+    return args, parser
 
 
 if __name__ == '__main__':
-    args = parse_args()
+    args, parser = parse_args()
+
+    if not isfile(args.urls_file):
+        parser.error('Файл со ссылками не найден')
 
     for url in read_urls_file(args.urls_file):
         print('url: {}'.format(url))
